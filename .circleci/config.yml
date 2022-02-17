@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  long_sleep:
+    resource_class: small
+    parameters:
+      naptime:
+        type: integer
+        default: 10
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: sleep << parameters.naptime >>
+
+workflows:
+  hibernate:
+    jobs:
+      - long_sleep:
+          matrix:
+            parameters:
+              naptime:
+                - 60
+                - 240
+                - 10

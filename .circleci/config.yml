@@ -11,7 +11,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: sleep << parameters.naptime >>
-  sleep_no_ouput:
+  sleep_no_output:
     resource_class: small
     parameters:
       limit:

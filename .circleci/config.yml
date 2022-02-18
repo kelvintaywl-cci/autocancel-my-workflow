@@ -11,14 +11,27 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: sleep << parameters.naptime >>
+  sleep_no_ouput:
+    resource_class: small
+    parameters:
+      limit:
+        type: integer
+        default: 10
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          command: sleep 10
+          no_output_timeout: 5s
 
 workflows:
   hibernate:
     jobs:
-      - long_sleep:
-          matrix:
-            parameters:
-              naptime:
-                - 60
-                - 240
-                - 10
+      - sleep_no_output
+#       - long_sleep:
+#           matrix:
+#             parameters:
+#               naptime:
+#                 - 60
+#                 - 240
+#                 - 10
